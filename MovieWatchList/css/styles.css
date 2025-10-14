@@ -46,3 +46,11 @@ input {
 #add-movie-btn:hover {
   background-color: #004d40;
 }
+
+#remove-movie-btn {
+  background-color: #00796b;
+}
+
+#remove-movie-btn:hover {
+  background-color: #004d40;
+}
