@@ -10,9 +10,10 @@ const options = {
 fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
   .then(res => res.json())
   .then(movies => {
-    renderMovies(movies.results)
-    console.log(movies.results)
-});
+    renderMovies(movies.results);
+    console.log(movies.results);
+  })
+  .catch(err => console.error(err));
 
 const cardsContainer = document.querySelector('#cards-container');
 
@@ -26,33 +27,31 @@ function renderMovies(movies) {
 
     // Creating card elements
     const div = document.createElement('div');
-    const imageLink = document.createElement('a')
-    const image = document.createElement('img')
-    const title = document.createElement('h3')
-    div.classList = 'card'
+    const imageLink = document.createElement('a');
+    const image = document.createElement('img');
+    const title = document.createElement('h3');
+    div.classList = 'card';
     div.id = movie.id;
-    imageLink.classList = 'card-link'
-    image.classList = 'card-img'
-    title.classList = 'card-title'
+    imageLink.classList = 'card-link';
+    image.classList = 'card-img';
+    title.classList = 'card-title';
 
     // Add overview page source
     imageLink.href = "overview.html";
-    // Open in a new tab
-    //imageLink.target = "_blank"
-    //imageLink.rel = "noopener noreferrer"
 
     // Creating image url for poster
-    image.src = "https://image.tmdb.org/t/p/w342" + movie.poster_path;
+    image.src = `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
 
     // Creating card title
-    title.innerText = `${movie.title}`
+    title.innerText = `${movie.title}`;
     
     // Display movie cards with information added
-    imageLink.appendChild(image)
-    div.appendChild(imageLink)
-    div.appendChild(title)
-    cardsContainer.appendChild(div)
+    imageLink.appendChild(image);
+    div.appendChild(imageLink);
+    div.appendChild(title);
+    cardsContainer.appendChild(div);
 
+    // Store selected movie id in session storage
     document.getElementById(movie.id).onclick = function () {
       sessionStorage.setItem('movieID', movie.id);
     }
@@ -64,12 +63,13 @@ function renderMovies(movies) {
 function searchMovies() {
   let query = document.getElementById("user-search").value
   console.log(query)
-  fetch('https://api.themoviedb.org/3/search/movie?query=' + query, options)
+  fetch(`https://api.themoviedb.org/3/search/movie?query=${query}`, options)
     .then(res => res.json())
     .then(movies => {
       cardsContainer.innerHTML = ""
       renderMovies(movies.results)
       console.log(movies.results)
-  });
+    })
+    .catch(err => console.error(err));
 }
 
