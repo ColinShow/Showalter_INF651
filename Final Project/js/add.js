@@ -18,29 +18,58 @@ const cardsContainer = document.querySelector('#cards-container');
 
 // Display movie cards
 function renderMovies(movies) {
-
   movies.forEach(movie => {
+    // Skip movie if no poster is present
+    if (movie.poster_path == null) {
+      return;
+    }
+
+    // Creating card elements
     const div = document.createElement('div');
+    const imageLink = document.createElement('a')
     const image = document.createElement('img')
     const title = document.createElement('h3')
-    const id = document.createElement('p')
     div.classList = 'card'
+    div.id = movie.id;
+    imageLink.classList = 'card-link'
     image.classList = 'card-img'
     title.classList = 'card-title'
-    id.classList = 'card-id'
+
+    // Add overview page source
+    imageLink.href = "overview.html";
+    // Open in a new tab
+    //imageLink.target = "_blank"
+    //imageLink.rel = "noopener noreferrer"
 
     // Creating image url for poster
-    image.src = "https://image.tmdb.org/t/p/w342" + movie.poster_path
+    image.src = "https://image.tmdb.org/t/p/w342" + movie.poster_path;
 
     // Creating card title
     title.innerText = `${movie.title}`
-
-    // Creating card ID
-    id.innerText = `${movie.id}`
-
-    div.appendChild(image)
+    
+    // Display movie cards with information added
+    imageLink.appendChild(image)
+    div.appendChild(imageLink)
     div.appendChild(title)
-    div.appendChild(id)
     cardsContainer.appendChild(div)
+
+    document.getElementById(movie.id).onclick = function () {
+      sessionStorage.setItem('movieID', movie.id);
+    }
+
   })
 };
+
+// Search through TMDB for user query
+function searchMovies() {
+  let query = document.getElementById("user-search").value
+  console.log(query)
+  fetch('https://api.themoviedb.org/3/search/movie?query=' + query, options)
+    .then(res => res.json())
+    .then(movies => {
+      cardsContainer.innerHTML = ""
+      renderMovies(movies.results)
+      console.log(movies.results)
+  });
+}
+

@@ -12,6 +12,7 @@ button {
 nav {
     display: flex;
     background-color: #E50914;
+    box-shadow: 0px 5px 20px rgb(0, 0, 0, 0.5);
     margin-bottom: 40px;
 }
 
@@ -36,6 +37,34 @@ nav > a:hover {
     text-align: center;
 }
 
+#search-bar > input[type=text] {
+    border: solid 1px black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    font-weight: bold;
+    width: auto;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#searchButton {
+    background-color: #E50914;
+    color: whitesmoke;
+    border: solid 1px black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    font-weight: bold;
+    width: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 5px;
+}
+
+#searchButton:hover {
+    background-color: #B20710;
+}
+
 /* Movie Cards CSS */
 #cards-container {
     display: flex;
@@ -52,7 +81,8 @@ nav > a:hover {
 
 .card-img {
     display: block;
-    border: solid #E50914 5px;
+    border: solid #E50914 4px;
+    box-shadow: 0px 0px 30px rgb(0, 0, 0);
     border-radius: 10px;
     width: 90%;
     margin: 15px;

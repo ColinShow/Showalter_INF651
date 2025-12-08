@@ -1,0 +1,33 @@
+/* Whole Page CSS */
+body {
+    background-color: rgb(21, 21, 21);
+    margin: 0;
+}
+
+button {
+    cursor: pointer;
+}
+
+/*Nav Bar CSS */
+nav {
+    display: flex;
+    background-color: #E50914;
+    box-shadow: 0px 5px 20px rgb(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+}
+
+nav > a {
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 25px;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
+nav > a:hover {
+    background-color: #B20710;
+}
