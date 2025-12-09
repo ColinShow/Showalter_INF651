@@ -64,4 +64,22 @@ nav > a:hover {
 
 #movie-overview {
     line-height: 25px;
+    margin-bottom: 50px;
+}
+
+#watchlist-btn {
+    display: block;
+    background-color: #E50914;
+    color: whitesmoke;
+    border: solid 1px black;
+    box-shadow: 0px 0px 20px rgb(0, 0, 0, 50%);
+    font-size: 25px;
+    font-weight: bold;
+    width: auto;
+    padding: 10px;
+    margin: auto;
+}
+
+#watchlist-btn:hover {
+    background-color: #B20710;
 }

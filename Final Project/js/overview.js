@@ -20,11 +20,19 @@ fetch('https://api.themoviedb.org/3/movie/' + sessionStorage.getItem("movieID") 
         const title = document.createElement('h1');
         const subInfo = document.createElement('h3');
         const overview = document.createElement('p');
+        const watchlistButton = document.createElement('button');
         detailsDiv.id = 'movie-details';
         image.id = 'movie-poster';
-        title.id = 'movie-title'
-        subInfo.id = 'movie-subinfo'
-        overview.id = 'movie-overview'
+        title.id = 'movie-title';
+        subInfo.id = 'movie-subinfo';
+        overview.id = 'movie-overview';
+        watchlistButton.id = 'watchlist-btn';
+
+        // local storage testing
+        const deleteButton = document.createElement('button');
+        deleteButton.id = 'delete-btn';
+        deleteButton.innerText = 'delete';
+
 
         // Creating image url for poster
         image.src = `https://image.tmdb.org/t/p/w500${details.poster_path}`;
@@ -38,12 +46,57 @@ fetch('https://api.themoviedb.org/3/movie/' + sessionStorage.getItem("movieID") 
         // Movie overview
         overview.innerText = `${details.overview}`;
 
+        // Create button to add to watchlist
+        watchlistButton.innerText = 'ADD TO WATCHLIST';
+
         // Display movie information
         infoContainer.appendChild(image);
         detailsDiv.appendChild(title);
         detailsDiv.appendChild(subInfo);
         detailsDiv.appendChild(overview);
+        detailsDiv.appendChild(watchlistButton);
+
+        detailsDiv.appendChild(deleteButton);
+
         infoContainer.appendChild(detailsDiv);
+
+        document.getElementById('watchlist-btn').onclick = function () {
+          addMovieToWatchlist();
+        }
+
+        document.getElementById('delete-btn').onclick = function () {
+          deleteWatchlist();
+        }
     })
     .catch(err => console.error(err));
+
+
+    // Create a new watchlist
+    function createWatchlist() {
+      const newWatchlist = [];
+      localStorage.setItem('movieWatchlist', JSON.stringify(newWatchlist));
+    }
+
+    // Add movie to watchlist
+    function addMovieToWatchlist() {
+      // Create a new watchlist if there isn't one already
+      if (localStorage.getItem('movieWatchlist') == null) {
+        createWatchlist();
+        console.log('created watchlist');
+      }
+      
+      // Add movie id to watchlist
+      const watchlist = JSON.parse(localStorage.getItem('movieWatchlist'));
+      console.log(`Before shift:`, watchlist);
+
+      watchlist.unshift(sessionStorage.getItem('movieID'));
+      console.log(`After shift:`, watchlist);
+
+      localStorage.setItem('movieWatchlist', JSON.stringify(watchlist));
+    }
+
+    function deleteWatchlist() {
+      localStorage.removeItem('movieWatchlist');
+      console.log('watchlist deleted');
+    }
   
