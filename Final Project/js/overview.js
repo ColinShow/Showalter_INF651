@@ -96,6 +96,7 @@ fetch('https://api.themoviedb.org/3/movie/' + sessionStorage.getItem("movieID") 
         watchlist.unshift(sessionStorage.getItem('movieID'));
         console.log(`After shift:`, watchlist);
         localStorage.setItem('movieWatchlist', JSON.stringify(watchlist));
+        alert('Movie has been added to your watchlist!')
       }
     }
 
