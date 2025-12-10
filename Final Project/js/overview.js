@@ -56,7 +56,7 @@ fetch('https://api.themoviedb.org/3/movie/' + sessionStorage.getItem("movieID") 
         detailsDiv.appendChild(overview);
         detailsDiv.appendChild(watchlistButton);
 
-        detailsDiv.appendChild(deleteButton);
+        //detailsDiv.appendChild(deleteButton);
 
         infoContainer.appendChild(detailsDiv);
 
@@ -64,9 +64,9 @@ fetch('https://api.themoviedb.org/3/movie/' + sessionStorage.getItem("movieID") 
           addMovieToWatchlist();
         }
 
-        document.getElementById('delete-btn').onclick = function () {
+       /* document.getElementById('delete-btn').onclick = function () {
           deleteWatchlist();
-        }
+        }*/
     })
     .catch(err => console.error(err));
 
