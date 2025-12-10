@@ -88,11 +88,15 @@ fetch('https://api.themoviedb.org/3/movie/' + sessionStorage.getItem("movieID") 
       // Add movie id to watchlist
       const watchlist = JSON.parse(localStorage.getItem('movieWatchlist'));
       console.log(`Before shift:`, watchlist);
-
-      watchlist.unshift(sessionStorage.getItem('movieID'));
-      console.log(`After shift:`, watchlist);
-
-      localStorage.setItem('movieWatchlist', JSON.stringify(watchlist));
+      
+      if (watchlist.indexOf(sessionStorage.getItem('movieID')) != -1) {
+        alert('Movie is already in your watchlist!');
+      }
+      else {
+        watchlist.unshift(sessionStorage.getItem('movieID'));
+        console.log(`After shift:`, watchlist);
+        localStorage.setItem('movieWatchlist', JSON.stringify(watchlist));
+      }
     }
 
     function deleteWatchlist() {
